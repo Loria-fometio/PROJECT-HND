@@ -3,72 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/bootstrap-5.3.3-dist/css/bootstrap.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-
-    <title>Document</title>
+    <title>Settings - BankPro</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body{
-            font-family: 'poppins';
+        /* Loading Spinner Styles */
+        #loadingSpinner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Ensure it's on top of everything */
         }
-        .card-body {
-    padding: 2rem;
-}
+        .spinner-border {
+            width: 3rem;
+            height: 3rem;
+        }
 
-.form-label {
-    font-size: 16px;
-}
+        /* Hide all content initially */
+        .content-section {
+            opacity: 0;
+            transform: translateY(20px); /* Slight vertical offset for animation */
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
 
-.form-check-label {
-    font-size: 16px;
-}
-
-.card-body button {
-    width: 100%;
-}
-
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa; /* Light gray background */
+            padding: 20px;
+        }
+        h1 {
+            color: #007bff; /* Blue header */
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .settings-container {
+            background-color: #ffffff; /* White background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .form-label {
+            font-weight: 500;
+            color: #333; /* Dark text */
+        }
+        .form-control {
+            border-radius: 5px;
+            border: 1px solid #ced4da; /* Light gray border */
+            padding: 10px;
+            font-size: 16px;
+        }
+        .form-control:focus {
+            border-color: #007bff; /* Blue border on focus */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        .submit-button {
+            background-color: #007bff; /* Blue button */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .submit-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        .confirmation-message {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f8f9fa; /* Light gray background */
+            display: none; /* Hidden by default */
+        }
+        .confirmation-message p {
+            margin: 0;
+            color: #555; /* Slightly lighter text */
+            font-size: 16px;
+        }
+        .confirmation-message i {
+            margin-right: 10px;
+            color: #007bff; /* Blue icons */
+        }
+        /* Dark theme styles */
+        body.dark-theme {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .dark-theme .settings-container {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+        .dark-theme .form-control {
+            background-color: #333;
+            color: #ffffff;
+            border-color: #444;
+        }
+        .dark-theme .form-label {
+            color: #ffffff;
+        }
+        .dark-theme .confirmation-message {
+            background-color: #333;
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
-    <div class="container mt-4">
-        <h2>Settings</h2>
-        <div class="card shadow-lg mt-3">
-            <div class="card-body">
-                <h5 class="card-title">Change Password</h5>
-                <form>
-                    <div class="mb-3">
-                        <label for="currentPassword" class="form-label">Current Password</label>
-                        <input type="password" class="form-control" id="currentPassword" required>
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Header Section -->
+        <div class="content-section" id="headerSection">
+            <h1><i class="bi bi-gear"></i> <span id="title">Settings</span></h1>
+        </div>
+
+        <!-- Settings Form Section -->
+        <div class="content-section" id="formSection">
+            <div class="settings-container">
+                <form id="settingsForm">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="language" class="form-label"><i class="bi bi-globe"></i> <span id="languageLabel">Language</span></label>
+                            <select class="form-control" id="language" required>
+                                <option value="">Select language</option>
+                                <option value="en">English</option>
+                                <option value="fr">French</option>
+                                <option value="es">Spanish</option>
+                                <option value="de">German</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="timezone" class="form-label"><i class="bi bi-clock"></i> <span id="timezoneLabel">Timezone</span></label>
+                            <select class="form-control" id="timezone" required>
+                                <option value="">Select timezone</option>
+                                <option value="UTC">UTC</option>
+                                <option value="EST">Eastern Standard Time (EST)</option>
+                                <option value="PST">Pacific Standard Time (PST)</option>
+                                <option value="CET">Central European Time (CET)</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="newPassword" class="form-label">New Password</label>
-                        <input type="password" class="form-control" id="newPassword" required>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="notifications" class="form-label"><i class="bi bi-bell"></i> <span id="notificationsLabel">Notifications</span></label>
+                            <select class="form-control" id="notifications" required>
+                                <option value="">Select notification preference</option>
+                                <option value="enabled">Enabled</option>
+                                <option value="disabled">Disabled</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="theme" class="form-label"><i class="bi bi-palette"></i> <span id="themeLabel">Theme</span></label>
+                            <select class="form-control" id="theme" required>
+                                <option value="">Select theme</option>
+                                <option value="light">Light</option>
+                                <option value="dark">Dark</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="confirmPassword" class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" id="confirmPassword" required>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary submit-button">
+                            <i class="bi bi-save"></i> <span id="saveButton">Save Settings</span>
+                        </button>
                     </div>
-                    <button type="submit" class="btn btn-success">Update Password</button>
                 </form>
+
+                <!-- Confirmation Message (Displayed after submission) -->
+                <div id="confirmationMessage" class="confirmation-message mt-4">
+                    <h5><i class="bi bi-check-circle"></i> <span id="confirmationTitle">Settings Updated</span></h5>
+                    <p><i class="bi bi-globe"></i> <span id="confirmationLanguage">Language</span>: <span id="displayLanguage"></span></p>
+                    <p><i class="bi bi-clock"></i> <span id="confirmationTimezone">Timezone</span>: <span id="displayTimezone"></span></p>
+                    <p><i class="bi bi-bell"></i> <span id="confirmationNotifications">Notifications</span>: <span id="displayNotifications"></span></p>
+                    <p><i class="bi bi-palette"></i> <span id="confirmationTheme">Theme</span>: <span id="displayTheme"></span></p>
+                </div>
             </div>
         </div>
-        <div class="card shadow-lg mt-4">
-            <div class="card-body">
-                <h5 class="card-title">Notification Preferences</h5>
-                <form>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
-                        <label class="form-check-label" for="emailNotifications">Email Notifications</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="smsNotifications">
-                        <label class="form-check-label" for="smsNotifications">SMS Notifications</label>
-                    </div>
-                    <button type="submit" class="btn btn-info mt-3">Save Preferences</button>
-                </form>
+
+        <!-- Current Time Section -->
+        <div class="content-section" id="timeSection">
+            <div class="mt-4">
+                <h5><i class="bi bi-clock"></i> <span id="currentTimeLabel">Current Time</span></h5>
+                <p id="timeDisplay"></p>
             </div>
         </div>
     </div>
-     
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Show loading spinner when the page starts loading
+        document.addEventListener('DOMContentLoaded', function () {
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            loadingSpinner.style.display = 'flex'; // Show spinner
+
+            // Simulate page loading (replace this with your actual loading logic)
+            setTimeout(() => {
+                loadingSpinner.style.display = 'none'; // Hide spinner after loading
+
+                // Reveal content sections chronologically
+                const sections = document.querySelectorAll('.content-section');
+                sections.forEach((section, index) => {
+                    setTimeout(() => {
+                        section.style.opacity = 1;
+                        section.style.transform = 'translateY(0)';
+                    }, index * 500); // Delay each section by 500ms
+                });
+            }, 2000); // Adjust the timeout to match your page's loading time
+        });
+
+        // Rest of your JavaScript code...
+    </script>
 </body>
 </html>

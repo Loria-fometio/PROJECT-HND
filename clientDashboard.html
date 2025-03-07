@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Dashboard - BankPro</title>
+    
+    <!-- Bootstrap & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .sidebar {
+            background-color: #fafafa;
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+            position: fixed;
+            width: 250px;
+            transition: all 0.3s;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar .nav-link {
+            color: #333;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        .sidebar .nav-link.active, .sidebar .nav-link:hover {
+            background-color: #e3f2fd;
+            color: #007bff;
+        }
+        .sidebar .bi {
+            margin-right: 8px;
+            color: #007bff;
+        }
+        .sidebar .close-btn {
+            display: none;
+            font-size: 24px;
+            color: #333;
+            text-align: right;
+            cursor: pointer;
+        }
+        .header {
+            background-color: #e3f2fd;
+            color: #333;
+            padding: 15px 30px;
+            margin-left: 250px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .content {
+            margin-left: 250px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+        iframe {
+            width: 100%;
+            height: 80vh;
+            border: none;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            text-decoration: none;
+        }
+        .accordion-item {
+            border: none !important;
+        }
+        .accordion-button {
+            background-color: transparent;
+            border: none !important;
+            color: #333;
+            font-weight: 500;
+        }
+        .accordion-button:not(.collapsed) {
+            background-color: transparent;
+            color: #007bff;
+        }
+        .accordion-body {
+            padding: 10px 0;
+        }
+        .accordion-body a {
+            color: #333;
+            display: block;
+            padding: 5px 15px;
+            transition: all 0.3s;
+        }
+        .accordion-body a:hover {
+            background-color: #e3f2fd;
+            border-radius: 4px;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                left: -250px;
+                position: fixed;
+                height: 100vh;
+                z-index: 1000;
+            }
+            .sidebar.active {
+                left: 0;
+            }
+            .sidebar .close-btn {
+                display: block;
+            }
+            .header, .content {
+                margin-left: 0;
+            }
+        }
+        .money {
+            position: absolute;
+            top: -50px;
+            width: 30px;
+            height: 30px;
+            animation: fall 3s linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="text-center">
+            <h4 class="mb-4">BankPro</h4>
+            <img src="19451833432d9.png" alt="Bank Logo" class="mb-3" style="height: 100px;">
+            <span class="close-btn" onclick="toggleSidebar()">&times;</span>
+        </div>
+        <div class="accordion" id="sidebarAccordion">
+            <!-- Loan Management Accordion -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="loanManagementHeading">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#loanManagementCollapse" aria-expanded="true" aria-controls="loanManagementCollapse">
+                        <i class="bi bi-wallet2"></i> Loan Management
+                    </button>
+                </h2>
+                <div id="loanManagementCollapse" class="accordion-collapse collapse show" aria-labelledby="loanManagementHeading" data-bs-parent="#sidebarAccordion">
+                    <div class="accordion-body">
+                        <a class="nav-link" href="#" onclick="loadPage('loan-status.html', this)"><i class="bi bi-file-earmark-text"></i> Loan Status</a>
+                        <a class="nav-link" href="#" onclick="loadPage('Request-loan.php', this)"><i class="bi bi-cash-coin"></i> Apply for a Loan</a>
+                        <a class="nav-link" href="#" onclick="loadPage('loan-repayment.html', this)"><i class="bi bi-credit-card"></i> Loan Repayment</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Account Management -->
+            <div class="accordion-item mt-3">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accountManagement">
+                        <i class="bi bi-wallet2"></i> Accounts Management
+                    </button>
+                </h2>
+                <div id="accountManagement" class="accordion-collapse collapse" data-bs-parent="#mainAccordion">
+                    <div class="accordion-body">
+                        <a href="#" onclick="loadPage('account-overview.html', this)">
+                            <i class="bi bi-eye"></i> View Accounts
+                        </a>
+                     
+                    </div>
+                </div>
+            </div>
+            <!-- Transactions Accordion -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="transactionsHeading">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#transactionsCollapse" aria-expanded="false" aria-controls="transactionsCollapse">
+                        <i class="bi bi-clock-history"></i> Transactions
+                    </button>
+                </h2>
+                <div id="transactionsCollapse" class="accordion-collapse collapse" aria-labelledby="transactionsHeading" data-bs-parent="#sidebarAccordion">
+                    <div class="accordion-body">
+                        <a class="nav-link" href="#" onclick="loadPage('transaction-history.html', this)"><i class="bi bi-list-check"></i> Transaction History</a>
+                        <a class="nav-link" href="#" onclick="loadPage('new-Transaction.php', this)"><i class="bi bi-hourglass-split"></i>Make transaction</a>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile & Settings Accordion -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="profileHeading">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#profileCollapse" aria-expanded="false" aria-controls="profileCollapse">
+                        <i class="bi bi-person-circle"></i> Profile & Settings
+                    </button>
+                </h2>
+                <div id="profileCollapse" class="accordion-collapse collapse" aria-labelledby="profileHeading" data-bs-parent="#sidebarAccordion">
+                    <div class="accordion-body">
+                        <a class="nav-link" href="#" onclick="loadPage('profile.html', this)"><i class="bi bi-person"></i> My Profile</a>
+                        <a class="nav-link" href="#" onclick="loadPage('change-password.html', this)"><i class="bi bi-shield-lock"></i> Change Password</a>
+                        <a class="nav-link" href="#" onclick="loadPage('notifications.php', this)"><i class="bi bi-bell"></i> Notifications</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feedback Accordion -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="feedbackHeading">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#feedbackCollapse" aria-expanded="false" aria-controls="feedbackCollapse">
+                        <i class="bi bi-chat-left-text"></i> Feedback
+                    </button>
+                </h2>
+                <div id="feedbackCollapse" class="accordion-collapse collapse" aria-labelledby="feedbackHeading" data-bs-parent="#sidebarAccordion">
+                    <div class="accordion-body">
+                        <a class="nav-link" href="#" onclick="loadPage('submit-feedback.html', this)"><i class="bi bi-pencil"></i> Submit Feedback</a>
+                        <a class="nav-link" href="#" onclick="loadPage('feedback-history.html', this)"><i class="bi bi-list-ul"></i> Feedback History</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Header -->
+    <header class="header d-flex justify-content-between align-items-center">
+        <button class="btn btn-light d-md-none" onclick="toggleSidebar()"><i class="bi bi-list"></i></button>
+        <h1 class="mb-0" id="clientName"></h1>
+        <a href="logOut.html" class="text-dark"><i class="bi bi-box-arrow-right"></i> Log Out</a>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="content">
+        <iframe id="contentFrame" src="loan-status.html"></iframe>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function loadPage(page, element) {
+            document.getElementById('contentFrame').src = page;
+            let links = document.querySelectorAll('.nav-link');
+            links.forEach(link => link.classList.remove('active'));
+            element.classList.add('active');
+        }
+        function toggleSidebar() {
+            let sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("active");
+        }
+        const clientName = localStorage.getItem('clientName');
+        const username = localStorage.getItem('username2');
+        document.getElementById('clientName').textContent = clientName;
+        document.getElementById('username').textContent = username;
+
+        function createMoneyAnimation() {
+            const moneyTypes = ['💵', '💰', '💴', '💶', '💷'];
+            const money = document.createElement('div');
+            money.classList.add('money');
+            money.innerHTML = moneyTypes[Math.floor(Math.random() * moneyTypes.length)];
+            document.body.appendChild(money);
+            
+            money.style.left = Math.random() * window.innerWidth + 'px';
+            money.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            
+            setTimeout(() => {
+                money.remove();
+            }, 3000);
+        }
+
+        setInterval(createMoneyAnimation, 500);
+    </script>
+</body>
+</html>

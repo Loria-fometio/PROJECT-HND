@@ -1,24 +1,22 @@
-// Toggle password visibility
-const togglePassword = document.getElementById("toggle-password");
-const passwordField = document.getElementById("password");
+// document.getElementById('loginForm').addEventListener('submit', function (e) {
+//     e.preventDefault();
 
-togglePassword.addEventListener("click", function () {
-    const type = passwordField.type === "password" ? "text" : "password";
-    passwordField.type = type;
-});
+//     // Get form values
+//     const username = document.getElementById('username').value;
+//     const password = document.getElementById('password').value;
+//     const userType = document.getElementById('userType').value;
 
-// Handle form submission
-const loginForm = document.getElementById("login-form");
-
-loginForm.addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent page reload on form submission
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-
-    if (email && password) {
-        // Simulate a successful login (you can replace this with a backend API call)
-        alert(`Logged in as: ${email}`);
-    } else {
-        alert("Please fill out both fields.");
-    }
-});
+//     // Perform login validation (example)
+//     if (username === "gloria" && password === "Gloria&1" && userType === "admin") {
+//         alert("Login successful! Redirecting to Admin Dashboard...");
+//         window.location.href = "dah.html"; // Redirect to Admin Dashboard
+//     } else if (username === "loan-officer" && password === "12345" && userType === "loan_officer") {
+//         alert("Login successful! Redirecting to Loan Officer Dashboard...");
+//         window.location.href = "loanDashbord.html"; // Redirect to Loan Officer Dashboard
+//     } else if (username === username && password === password && userType === "client") {
+//         alert("Login successful! Redirecting to Client Dashboard...");
+//         window.location.href = "clientDashboard.html"; // Redirect to Client Dashboard
+//     } else {
+//         alert("Invalid username, password, or user type. Please try again.");
+//     }
+// });

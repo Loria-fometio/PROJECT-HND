@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Accounts</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa; /* Light gray background */
+            padding: 20px;
+        }
+        h1 {
+            color: #007bff; /* Blue header */
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .account-container {
+            background-color: #ffffff; /* White background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .account-card {
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f8f9fa; /* Light gray background for cards */
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .account-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .account-card h5 {
+            color: #007bff; /* Blue header */
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .account-card p {
+            margin: 0;
+            color: #555; /* Slightly lighter text */
+            font-size: 16px;
+        }
+        .account-card i {
+            margin-right: 10px;
+            color: #007bff; /* Blue icons */
+        }
+        .action-button {
+            background-color: #007bff; /* Blue button */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .action-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="bi bi-wallet2"></i> Manage Accounts</h1>
+        <div class="account-container">
+            <div class="row">
+                <!-- Account Card 1 -->
+                <div class="col-md-6">
+                    <div class="account-card">
+                        <h5><i class="bi bi-person"></i> John Doe</h5>
+                        <p><i class="bi bi-credit-card"></i> Account Number: 1234567890</p>
+                        <p><i class="bi bi-cash"></i> Balance: $5,000.00</p>
+                        <p><i class="bi bi-calendar"></i> Last Transaction: 2023-10-15</p>
+                        <div class="mt-3">
+                            <button class="btn btn-primary action-button" onclick="viewAccountDetails(1)">
+                                <i class="bi bi-eye"></i> View Details
+                            </button>
+                            <button class="btn btn-danger action-button ms-2" onclick="deleteAccount(1)">
+                                <i class="bi bi-trash"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Account Card 2 -->
+                <div class="col-md-6">
+                    <div class="account-card">
+                        <h5><i class="bi bi-person"></i> Jane Smith</h5>
+                        <p><i class="bi bi-credit-card"></i> Account Number: 0987654321</p>
+                        <p><i class="bi bi-cash"></i> Balance: $3,200.00</p>
+                        <p><i class="bi bi-calendar"></i> Last Transaction: 2023-10-10</p>
+                        <div class="mt-3">
+                            <button class="btn btn-primary action-button" onclick="viewAccountDetails(2)">
+                                <i class="bi bi-eye"></i> View Details
+                            </button>
+                            <button class="btn btn-danger action-button ms-2" onclick="deleteAccount(2)">
+                                <i class="bi bi-trash"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function viewAccountDetails(accountId) {
+            alert(`Viewing details for account ID: ${accountId}`);
+            // Redirect to account details page or open a modal
+        }
+
+        function deleteAccount(accountId) {
+            if (confirm(`Are you sure you want to delete account ID: ${accountId}?`)) {
+                alert(`Account ID: ${accountId} deleted successfully.`);
+                // Perform delete operation (e.g., API call)
+            }
+        }
+    </script>
+</body>
+</html>

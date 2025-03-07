@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BankPro - Modern Banking Solutions</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Animate.css for Animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom Styles -->
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Light gray background */
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #007bff; /* Blue navbar */
+            padding: 15px 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+        .navbar.scrolled {
+            background-color: #0056b3; /* Darker blue when scrolled */
+        }
+        .navbar-brand {
+            color: white !important;
+            font-weight: 600;
+            font-size: 24px;
+        }
+        .navbar-brand i {
+            margin-right: 10px;
+        }
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+            margin-left: 20px;
+        }
+        .nav-link:hover {
+            color: #ffc107 !important; /* Yellow hover */
+        }
+
+        /* Hero Section with Parallax */
+        .hero-section {
+            background-image: url('banking-background.jpg'); /* Add your background image */
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white;
+            padding: 150px 20px;
+            text-align: center;
+            position: relative;
+        }
+        .hero-section h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+        .hero-section p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-in-out;
+        }
+        .hero-section .btn {
+            background-color: #ffc107; /* Yellow button */
+            color: #333;
+            border: none;
+            padding: 10px 30px;
+            font-size: 18px;
+            font-weight: 500;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        .hero-section .btn:hover {
+            background-color: #e0a800; /* Darker yellow on hover */
+            transform: scale(1.05);
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 60px 20px;
+            background-color: #ffffff; /* White background */
+        }
+        .features-section h2 {
+            color: #007bff; /* Blue header */
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .feature-card {
+            background-color: #f8f9fa; /* Light gray background */
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease-in-out;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .feature-card i {
+            font-size: 40px;
+            color: #007bff; /* Blue icons */
+            margin-bottom: 15px;
+        }
+        .feature-card h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .feature-card p {
+            font-size: 16px;
+            color: #555; /* Slightly lighter text */
+        }
+
+        /* Testimonials Carousel */
+        .testimonials-section {
+            background-color: #f8f9fa; /* Light gray background */
+            padding: 60px 20px;
+        }
+        .testimonials-section h2 {
+            color: #007bff; /* Blue header */
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .testimonial-card {
+            background-color: #ffffff; /* White background */
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 0 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .testimonial-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+        .testimonial-card p {
+            font-size: 16px;
+            color: #555; /* Slightly lighter text */
+        }
+        .testimonial-card h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .testimonial-card span {
+            font-size: 14px;
+            color: #777;
+        }
+
+        /* Video Section */
+        .video-section {
+            background-color: #ffffff; /* White background */
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .video-section h2 {
+            color: #007bff; /* Blue header */
+            font-weight: 600;
+            margin-bottom: 40px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-in-out;
+        }
+        .video-container iframe {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #007bff; /* Blue footer */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .footer a {
+            color: #ffc107; /* Yellow link */
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <!-- Brand Logo -->
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-bank"></i> BankPro
+            </a>
+
+            <!-- Toggle Button for Mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <!-- Features Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+
+                    <!-- Login Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Login
+                        </a>
+                        <!-- Dropdown Menu -->
+                        <ul class="dropdown-menu" aria-labelledby="loginDropdown">
+                            <li><a class="dropdown-item" href="client-login.php">Login as a Client</a></li>
+                            <li><a class="dropdown-item" href="loanofficer-login.html">Login as a Loan Officer</a></li>
+                            <li><a class="dropdown-item" href="admin-login.html">Login as an Admin</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Sign Up Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="sign-up.html">Sign up</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1 class="animate__animated animate__fadeInDown">Welcome to BankPro</h1>
+            <p class="animate__animated animate__fadeInUp">Your trusted partner for modern banking solutions. Manage your accounts, transactions, and more with ease.</p>
+            <a href="login.html" class="btn animate__animated animate__fadeIn">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <h2 class="animate__animated animate__fadeIn">Why Choose BankPro?</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-card animate__animated animate__fadeInUp">
+                        <i class="bi bi-wallet2"></i>
+                        <h3>Easy Account Management</h3>
+                        <p>Manage your accounts seamlessly with our intuitive dashboard.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card animate__animated animate__fadeInUp">
+                        <i class="bi bi-shield-lock"></i>
+                        <h3>Secure Transactions</h3>
+                        <p>Your transactions are protected with advanced security features.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card animate__animated animate__fadeInUp">
+                        <i class="bi bi-graph-up"></i>
+                        <h3>Real-Time Insights</h3>
+                        <p>Get real-time updates and insights into your financial activities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="animate__animated animate__fadeIn">What Our Customers Say</h2>
+            <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="testimonial-card">
+                            <img src="customer1.jpg" alt="Customer 1">
+                            <p>"BankPro has made managing my finances so much easier. Highly recommended!"</p>
+                            <h4>John Doe</h4>
+                            <span>Small Business Owner</span>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="testimonial-card">
+                            <img src="customer2.jpg" alt="Customer 2">
+                            <p>"The security features give me peace of mind. Great job, BankPro!"</p>
+                            <h4>Jane Smith</h4>
+                            <span>Freelancer</span>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="testimonial-card">
+                            <img src="customer3.jpg" alt="Customer 3">
+                            <p>"Real-time insights have helped me make better financial decisions."</p>
+                            <h4>Michael Johnson</h4>
+                            <span>Entrepreneur</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section">
+        <div class="container">
+            <h2 class="animate__animated animate__fadeIn">Watch Our Demo</h2>
+            <div class="video-container animate__animated animate__fadeInUp">
+                <!-- Embed a YouTube video or use a local video file -->
+                <iframe src="https://www.youtube.com/embed/qH4qCX4GL4k" title="BankPro Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 BankPro. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="faq's.html">FAQ's</a></p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Smooth Scroll Script -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Sticky Navbar
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

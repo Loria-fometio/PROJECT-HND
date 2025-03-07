@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 20px;
+        }
+        .welcome-message {
+            font-size: 24px;
+            font-weight: 600;
+            color: #007bff;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .money {
+            position: absolute;
+            top: -50px;
+            width: 30px;
+            height: 30px;
+            animation: fall 3s linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        .export-btn {
+            margin-top: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #007bff;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+        .btn-export {
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 4px;
+            transition: all 0.3s;
+            color: white;
+        }
+        .btn-export:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-message" id="welcomeMessage">
+        Welcome to Your Loan Dashboard
+    </div>
+
+    <div class="container">
+        <h2><i class="bi bi-clipboard-data"></i> Client Report</h2>
+        <table class="table table-bordered table-striped">
+            <thead class="table-primary">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Account Type</th>
+                    <th>Loan Amount</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>John Doe</td>
+                    <td>john.doe@example.com</td>
+                    <td>+123456789</td>
+                    <td>Business</td>
+                    <td>$10,000</td>
+                    <td><span class="badge bg-success">Approved</span></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Jane Smith</td>
+                    <td>jane.smith@example.com</td>
+                    <td>+987654321</td>
+                    <td>Savings</td>
+                    <td>$5,000</td>
+                    <td><span class="badge bg-warning text-dark">Pending</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-export"  id="exportReport"><i class="bi bi-printer"></i> Export Report</button>
+    </div>
+    
+    <script>
+        document.getElementById('exportReport').addEventListener('click', function() {
+            window.print();
+        });
+
+        function createMoneyAnimation() {
+            const moneyTypes = ['💵', '💰', '💴', '💶', '💷'];
+            const money = document.createElement('div');
+            money.classList.add('money');
+            money.innerHTML = moneyTypes[Math.floor(Math.random() * moneyTypes.length)];
+            document.body.appendChild(money);
+            
+            money.style.left = Math.random() * window.innerWidth + 'px';
+            money.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            
+            setTimeout(() => {
+                money.remove();
+            }, 3000);
+        }
+
+        setInterval(createMoneyAnimation, 500);
+    </script>
+</body>
+</html>
